@@ -13,12 +13,12 @@ class BreedAndAge extends StatelessWidget {
       children: [
         Text(
           '- breed : ${Provider.of<Dog>(context).breed}',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
           ),
         ),
-        SizedBox(height: 10),
-        Age(),
+        const SizedBox(height: 10),
+        const Age(),
       ],
     );
   }
