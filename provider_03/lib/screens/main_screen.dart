@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../models/dog.dart';
 
 class MainScreen extends StatelessWidget {
