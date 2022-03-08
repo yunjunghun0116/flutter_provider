@@ -18,7 +18,7 @@ class _HandleDialogPageState extends State<HandleDialogPage> {
       showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
+          return const AlertDialog(
             content: Text('Be careful!'),
           );
         },
@@ -33,7 +33,7 @@ class _HandleDialogPageState extends State<HandleDialogPage> {
         showDialog(
           context: context,
           builder: (context) {
-            return AlertDialog(
+            return const AlertDialog(
               content: Text('Count is 3'),
             );
           },
