@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'pages/counter_page.dart';
 import 'pages/handle_dialog_page.dart';
 import 'pages/navigate_page.dart' show NavigatePage;

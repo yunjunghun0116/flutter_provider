@@ -16,10 +16,13 @@ class _CounterPageState extends State<CounterPage> {
   @override
   void initState() {
     super.initState();
+    print('check');
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       context.read<Counter>().increment();
       myCounter = context.read<Counter>().counter + 10;
+      print('haha');
     });
+    print('dbcheck');
     // Future.delayed(Duration(seconds: 0), () {
     //   context.read<Counter>().increment();
     //   myCounter = context.read<Counter>().counter + 10;
