@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void appListener()async {
+    print('listener 실행');
     if (appProv.state == AppState.success) {
      List value =await Navigator.push(context, MaterialPageRoute(
         builder: (context) {
