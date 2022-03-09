@@ -1,37 +1,24 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-class TodoSearchState extends Equatable {
+class TodoSearchState {
   final String searchTerm;
-  const TodoSearchState({
+
+  TodoSearchState({
     required this.searchTerm,
   });
 
-  factory TodoSearchState.initial() {
-    return const TodoSearchState(searchTerm: '');
+  factory TodoSearchState.initial(){
+    return TodoSearchState(searchTerm: '');
   }
 
-  @override
-  List<Object> get props => [searchTerm];
-
-  @override
-  bool get stringify => true;
-
-  TodoSearchState copyWith({
-    String? searchTerm,
-  }) {
-    return TodoSearchState(
-      searchTerm: searchTerm ?? this.searchTerm,
-    );
-  }
 }
 
-class TodoSearch with ChangeNotifier {
+class TodoSearch with ChangeNotifier{
   TodoSearchState _state = TodoSearchState.initial();
   TodoSearchState get state => _state;
 
-  void setSearchTerm(String newSearchTerm) {
-    _state = _state.copyWith(searchTerm: newSearchTerm);
+  void setSearchTerm(String newSearchTerm){
+    _state = TodoSearchState(searchTerm: newSearchTerm);
     notifyListeners();
   }
 }

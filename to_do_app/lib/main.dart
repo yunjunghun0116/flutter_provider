@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'pages/todos_page.dart';
-import 'providers/providers.dart';
+import 'package:to_do_app/providers/providers.dart';
+import 'screens/todo_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,36 +17,26 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<TodoFilter>(
           create: (context) => TodoFilter(),
         ),
-        ChangeNotifierProvider<TodoSearch>(
-          create: (context) => TodoSearch(),
-        ),
         ChangeNotifierProvider<TodoList>(
           create: (context) => TodoList(),
         ),
-        ChangeNotifierProxyProvider<TodoList, ActiveTodoCount>(
-          create: (context) => ActiveTodoCount(
-            initialActiveTodoCount: context.read<TodoList>().state.todos.length,
-          ),
-          update: (
-            BuildContext context,
-            TodoList todoList,
-            ActiveTodoCount? activeTodoCount,
-          ) =>
-              activeTodoCount!..update(todoList),
+        ChangeNotifierProvider<TodoSearch>(
+          create: (context) => TodoSearch(),
         ),
+        ChangeNotifierProxyProvider<TodoList, ActiveTodoCount>(
+            create: (context) => ActiveTodoCount(),
+            update: (BuildContext context, TodoList todoList,
+                ActiveTodoCount? activeTodoCount) {
+              activeTodoCount!.update(todoList);
+              return activeTodoCount;
+            }),
         ChangeNotifierProxyProvider3<TodoFilter, TodoSearch, TodoList,
-            FilteredTodos>(
-          create: (context) => FilteredTodos(
-            initialFilteredTodos: context.read<TodoList>().state.todos,
-          ),
-          update: (
-            BuildContext context,
-            TodoFilter todoFilter,
-            TodoSearch todoSearch,
-            TodoList todoList,
-            FilteredTodos? filteredTodos,
-          ) =>
-              filteredTodos!..update(todoFilter, todoSearch, todoList),
+            FilteredTodoList>(
+          create: (context)=>FilteredTodoList(),
+          update: (BuildContext context,TodoFilter todoFilter,TodoSearch todoSearch,TodoList todoList,FilteredTodoList? filteredTodoList){
+            filteredTodoList!.update(todoFilter, todoSearch, todoList);
+            return filteredTodoList;
+          },
         ),
       ],
       child: MaterialApp(
@@ -56,7 +45,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const TodosPage(),
+        home: const TodoScreen(),
       ),
     );
   }
