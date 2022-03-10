@@ -10,14 +10,19 @@ class TodoScreenHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('Todo',style: TextStyle(
-          fontSize:
-            40,
-        ),),
-        Text('${Provider.of<TodoList>(context).state.todoList.length} items left',style: TextStyle(
-          fontSize: 20,
-          color: Colors.redAccent,
-        ),)
+        const Text(
+          'Todo',
+          style: TextStyle(
+            fontSize: 40,
+          ),
+        ),
+        Text(
+          '${Provider.of<ActiveTodoCount>(context).state.activeTodoCount} items left',
+          style: const TextStyle(
+            fontSize: 20,
+            color: Colors.redAccent,
+          ),
+        )
       ],
     );
   }
