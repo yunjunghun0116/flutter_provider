@@ -14,23 +14,15 @@ class ActiveTodoCountState {
   }
 }
 
-class ActiveTodoCount with ChangeNotifier {
-  ActiveTodoCount({
-    required this.initialActiveTodoCount,
-  }) {
-    print(initialActiveTodoCount);
-    _state = ActiveTodoCountState(activeTodoCount: initialActiveTodoCount);
-  }
+class ActiveTodoCount {
+  final TodoList todoList;
 
-  final int initialActiveTodoCount;
-  late ActiveTodoCountState _state;
-  ActiveTodoCountState get state => _state;
+  ActiveTodoCount({required this.todoList});
 
-  void update(TodoList todoList) {
-    final int newActiveTodoCount =
-        todoList.state.todoList.where((Todo t) => !t.completed).toList().length;
-
-    _state = ActiveTodoCountState(activeTodoCount: newActiveTodoCount);
-    notifyListeners();
-  }
+  ActiveTodoCountState get state => ActiveTodoCountState(
+        activeTodoCount: todoList.state.todoList
+            .where((Todo todo) => !todo.completed)
+            .toList()
+            .length,
+      );
 }

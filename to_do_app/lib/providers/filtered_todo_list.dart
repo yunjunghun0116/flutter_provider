@@ -16,15 +16,18 @@ class FilteredTodoListState {
   }
 }
 
-class FilteredTodoList with ChangeNotifier {
-  FilteredTodoListState _state = FilteredTodoListState.initial();
-  FilteredTodoListState get state => _state;
+class FilteredTodoList {
+  final TodoFilter todoFilter;
+  final TodoSearch todoSearch;
+  final TodoList todoList;
 
-  void update(
-    TodoFilter todoFilter,
-    TodoSearch todoSearchTerm,
-    TodoList todoList,
-  ) {
+  FilteredTodoList({
+    required this.todoSearch,
+    required this.todoList,
+    required this.todoFilter,
+  });
+
+  FilteredTodoListState get state {
     List<Todo> _filteredTodoList = [];
     switch (todoFilter.state.filter) {
       case Filter.active:
@@ -43,16 +46,15 @@ class FilteredTodoList with ChangeNotifier {
         break;
     }
 
-    if (todoSearchTerm.state.searchTerm.isNotEmpty) {
+    if (todoSearch.state.searchTerm.isNotEmpty) {
       //검색어 필터링 하기
       _filteredTodoList = _filteredTodoList
           .where((Todo todo) => todo.desc
               .toLowerCase()
-              .contains(todoSearchTerm.state.searchTerm.toLowerCase()))
+              .contains(todoSearch.state.searchTerm.toLowerCase()))
           .toList();
     }
 
-    _state = FilteredTodoListState(filteredTodoList: _filteredTodoList);
-    notifyListeners();
+  return FilteredTodoListState(filteredTodoList: _filteredTodoList);
   }
 }
